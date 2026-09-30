@@ -39,9 +39,9 @@ def _init_crash_log():
             except:
                 pass
         
-        # 方法3: 使用固定路径（作为最后手段）
+        # 方法3: 使用当前工作目录（作为最后手段）
         if script_dir is None:
-            script_dir = r'c:\Users\m1342\Desktop\Lesson\单片机原理与应用\大作业\pc_controller'
+            script_dir = os.getcwd()
         
         _global_log_path = os.path.join(script_dir, 'crash_log.txt')
         
