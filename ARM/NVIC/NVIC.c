@@ -2,7 +2,7 @@
 * 模块名称：NVIC.c
 * 摘    要：NVIC模块，包含NVIC中断分组设置
 * 当前版本：1.0.0
-* 作    者：SZLY(COPYRIGHT 2018 - 2020 SZLY. All rights reserved.)
+* 作    者：Leo Leung
 * 完成日期：2020年01月01日 
 * 内    容：
 * 注    意：                                                                  

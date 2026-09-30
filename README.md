@@ -2,6 +2,8 @@
 
 > An embedded-system course project by **Leo Leung**, combining STM32 gesture sensing with a PC-side music player.
 
+![System architecture illustration](./docs/assets/system-architecture.png)
+
 ## Overview
 
 This project connects an STM32F10x-based controller to a desktop music player. The embedded side reads gesture and 3D position data from an **MGC3130** gesture sensor, displays device status on an OLED, and exchanges control/status data over UART. A Python controller on the PC side receives sensor data, maps gestures to playback actions, and sends song information and control state back to the MCU.
@@ -25,8 +27,10 @@ This project connects an STM32F10x-based controller to a desktop music player. T
 | Right | Next song |
 | Up | Volume up |
 | Down | Volume down |
-| Clockwise circle | Single-song loop |
-| Counter-clockwise circle | Playlist loop |
+| Clockwise circle | Pause / resume in the current Python controller |
+| Counter-clockwise circle | Pause / resume in the current Python controller |
+
+The firmware register labels still describe the circle commands as single-song / playlist loop. The PC controller currently routes both to `toggle_pause()`. This table describes the implemented PC behavior; the firmware labels and PC semantics need alignment before a hardware demo.
 
 ## System flow
 
@@ -52,10 +56,44 @@ GestureControl-based-STM32-/
 │   ├── Gesture/       # MGC3130 driver
 │   └── Modbus/        # Register/protocol handling
 ├── FW/                # STM32 standard peripheral library
-├── ARM/               # CMSIS / startup / system files
-├── Project/           # Keil project files
+├── ARM/               # Interrupt/timing helpers + CMSIS / startup / system files
+├── Project/           # Debug configurations and historical build outputs
 └── music_player_controller.py
 ```
+
+## Hardware, firmware and PC controller
+
+| Layer | Implementation |
+| --- | --- |
+| Sensor | MGC3130; gesture and X/Y/Z acquisition over hardware I2C |
+| MCU | STM32F10x; initialization, periodic work, UART and register handling |
+| Display | SSD1306 OLED for device and playback status |
+| PC | Python controller; serial reception, gesture mapping, pygame playback and optional Windows volume control |
+| Return path | Modbus-style registers for control, volume, song index and song text |
+
+## Getting started
+
+The firmware requires compatible STM32 hardware, an MGC3130 sensor, an OLED and a serial connection. Review pin assignments in `HW/Gesture`, `HW/UART1` and `App/OLED` before wiring. This snapshot does not contain a `.uvproj` / `.uvprojx` project file; firmware building requires the original Keil project or a configured project using the included sources.
+
+For the PC side, install the required serial and playback packages:
+
+```bash
+python -m pip install pyserial pygame
+```
+
+On Windows, optional system-volume control uses `pycaw` and `comtypes`:
+
+```bash
+python -m pip install pycaw comtypes
+```
+
+Put supported audio files in the `Music` folder beside the script and choose the actual serial port:
+
+```bash
+python music_player_controller.py COM11 115200
+```
+
+`COM11` is the script default, not a requirement for your device. The architecture image is an explanation of the code, not a photograph or proof of a new hardware run.
 
 ## Open-source references and acknowledgements
 

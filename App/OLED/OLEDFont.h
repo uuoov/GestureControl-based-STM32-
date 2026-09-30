@@ -2,7 +2,7 @@
 * 模块名称：OLEDFont.h
 * 摘    要：OLED字体定义
 * 当前版本：1.0.0
-* 作    者：SZLY(COPYRIGHT 2018 - 2020 SZLY. All rights reserved.)
+* 作    者：Leo Leung
 * 完成日期：2020年01月01日
 * 内    容：
 * 注    意：常用ASCII表
