@@ -2,7 +2,7 @@
 * 模块名称：Main.c
 * 简    介：该文件主要负责硬件初始化和main函数
 * 当前版本：1.0.0
-* 作    者：SZLY(COPYRIGHT 2018 - 2020 SZLY. All rights reserved.)
+* 作    者：Leo Leung
 * 创建日期：2020年01月01日
 * 数    据：
 * 注    意：注意勾选Options for Target 'Target1'->Code Generation->Use MicroLIB，否则printf无法使用                                                                 34→**********************************************************************************************************
