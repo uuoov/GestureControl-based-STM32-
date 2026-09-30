@@ -1,0 +1,23 @@
+# Python runtime files
+__pycache__/
+*.py[cod]
+crash_log.txt
+*.log
+
+# Keil / embedded build outputs
+Project/Objects/
+Project/Listings/
+*.axf
+*.hex
+*.bin
+*.map
+*.lst
+*.d
+*.o
+*.obj
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
