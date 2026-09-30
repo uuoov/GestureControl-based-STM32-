@@ -57,9 +57,29 @@ GestureControl-based-STM32-/
 └── music_player_controller.py
 ```
 
+## Open-source references and acknowledgements
+
+This project was developed by **Leo Leung** and includes a substantial STM32-side port and secondary implementation based on open-source references.
+
+The MGC3130 gesture-sensing workflow references **[Corebb / RealCorebb's bbGesture](https://github.com/RealCorebb/bbGesture)**. The bbGesture project provides hardware design resources, Arduino examples, PC tools, and an MGC3130 library adapted from DFRobot.
+
+The upstream MGC3130 library is **[DFRobot_MGC3130](https://github.com/DFRobot/DFRobot_MGC3130)**, originally credited by DFRobot to **Yangfeng (Feng Yang)** and released under the MIT License.
+
+Based on these references, **Leo Leung** ported and reworked the workflow for the STM32F10x platform and implemented the embedded-system integration, including:
+
+- hardware I2C communication with the MGC3130;
+- sensor reset and data-ready handling;
+- gesture and X/Y/Z position acquisition;
+- UART communication between the MCU and PC;
+- OLED status display;
+- playback-control state handling;
+- PC-side music-controller interaction.
+
+STM32 Standard Peripheral Library and CMSIS components remain third-party vendor dependencies and retain their original authorship and licensing.
+
 ## Notes
 
-This repository is retained as an educational embedded-systems project. Some vendor/library files and generated Keil artifacts are part of the original project history. New work should avoid committing generated build outputs.
+Some generated Keil build artifacts remain in the historical project tree. New work should avoid committing generated build outputs.
 
 ## Author
 
